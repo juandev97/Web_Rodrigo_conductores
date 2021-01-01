@@ -40,25 +40,33 @@ def index():
         CC = conductor['CC']
         Direccion = conductor['Direccion']
         Email = conductor['Email']
-        propietario = conductor['propietario']
-        tipo_vehiculo = conductor['tipo_vehiculo']
+        propietario = conductor['Propietario']
+        tipo_vehiculo = conductor['tipo']
         fecha_cumple = conductor['fecha_cumple']
-        path_firma = conductor['path_firma']
-    contador = 0
-    print(f"Ehhhhhhh {contador} ")
+        path_firma = "C:/Descargas/firma.jpg"
     
-    with engine.connect() as connection:
-        result = connection.execute("Select * from Datos_conductor")
-        for row in result:
-            a = f"username: {row[1]}"
-            contador = contador +1
-            print(f"Ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh {a}")
-    
-    print(f"Ehhhhhhh {contador}")
-    
+        
+        with engine.connect() as connection:
+            #print(f"Insert into Datos_conductor( Nombre,CC,Direccion,Email,propietario,tipo_vehiculo,fecha_cumple,path_firma) values(\"{Nombre}\", \"{CC}\" , \"{Direccion}\", \"{Email}\", \"{propietario}\" , \"{tipo_vehiculo}\", {fecha_cumple}, \"{path_firma}\")")
+            connection.execute(f"Insert into Datos_conductor(Nombre,CC,Direccion,Email,propietario,tipo_vehiculo,fecha_cumple,path_firma) values(\'{Nombre}\', \'{CC}\' , \'{Direccion}\', \'{Email}\', {propietario}, \'{tipo_vehiculo}\', \'{fecha_cumple}\', \'{path_firma}\');")
+
     #return a
     return render_template('index.html')
 
+
+
+
+
+@app.route('/consultar')
+def consultar():
+    with engine.connect() as connection:
+        a = ""
+        result = connection.execute("Select * from Datos_conductor")
+        for row in result:
+            a = a + f"username: {row[1]}"
+            print(f"Ahhhhhhhhh {a}")
+
+    return a
 
 if __name__ == '__main__':
     app.run(debug=True)

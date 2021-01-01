@@ -10,14 +10,110 @@
 
     <div>
         <h1> Registro conductor</h1>
+        <a href="localhost:5000/">Insertar</a>
+        <a href="localhost:5000/consultar">Consultar</a>
+        
     </div>
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.sound.min.js"></script>
+<script src='p5.js'></script>
+
+
+<script>
+
+    var drawing = [];
+    var current_path = [];
+
+    function setup() {
+
+        canvas = createCanvas(400, 280);
+        canvas.mousePressed(startPath);
+        canvas.position(300, 80);
+        //canvas.mouseReleased(endPath);
+
+    }
+
+    function startPath() {
+        current_path = [];
+        drawing.push(current_path);
+
+    }
+
+    //function endPath(){
+    //  drawing.push(currentPath);
+    //}
+
+    function draw() {
+
+        background(245);
+
+        fill(255, 255, 255);
+        strokeWeight(4);
+        text("Firma", 185, 15);
+
+
+        fill(235, 230, 235);
+        stroke(1);
+        rect(295, 250, 95, 50);
+        fill(255, 255, 255);
+        strokeWeight(4);
+        text("Reiniciar", 320, 275);
+
+       
+
+        if (mouseIsPressed) {
+            var point = {
+                x: mouseX,
+                y: mouseY
+            }
+
+            if (mouseX >= 290 && mouseY >= 250) {
+                
+                drawing = [];
+            } else {
+                if(mouseX > 1){
+
+                    current_path.push(point);
+                }
+            }
+
+        }
+
+
+
+        stroke(0);
+        strokeWeight(6);
+        //fill(255,255,255);
+        noFill();
+
+        for (var i = 0; i < drawing.length; i++) {
+            var path = drawing[i];
+            beginShape();
+            for (var j = 0; j < path.length; j++) {
+                vertex(path[j].x, path[j].y)
+            }
+            endShape();
+        }
+    }
+
+    function Guardar() {
+        saveCanvas(canvas, "firma_.jpg");
+        
+    }
+
+    new p5(sketch, 'ss');
+
+</script>
 
     <div id="formulario">
             <form method="POST" action="">
 
-                
+                <br>
                 <span> Cedula</span>
-                <input type="text" name="Cedula">
+                <input type="text" name="CC">
                     
                 <br>
                 <br>
@@ -39,7 +135,7 @@
                 <br>
                 
                 <span> Fecha de nacimiento</span>
-                <input type="date" id="birthday" name="trip-start"
+                <input type="date" id="birthday" name="fecha_cumple"
                 value="2021-01-01"
                 min="1920-01-01" max="2025-12-31">
                 
@@ -47,7 +143,10 @@
                 <br>
                 
                 <span> Propietario</span>
-                <input type="checkbox" name="Propietario">
+                <select id="Propietario" name="Propietario">
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                </select>
                 
                 <br>
                 <br>
@@ -62,6 +161,8 @@
                 <br>
                 <input type="submit" name="button">
         </form>
+
+        
     </div>
     
 </body>
