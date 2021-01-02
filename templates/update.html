@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Registro conductor</title>
-
+    <title> Actualizar conductor {{conductor[1]}}</title>
     <style>
-         
         h1{
             color:green; 
         }
-    
     </style>
 </head>
 <body>
@@ -22,16 +18,17 @@
     </div>
     {% endif %}
     
+    {% for conductor in conductor %}
     <div>
-        <h1> Registro conductor</h1>
+        <h1>Actualizar conductor {{ conductor[1] }} </h1>
         
-        
-        <ul>          
+        <ul>    
             <li> <a href="http://localhost:5000/">Insertar</a></li>
             <li> <a href="http://localhost:5000/consultar">Consultar</a></li>
         </ul>
+        
     </div>
-
+    {% endfor %}
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
@@ -126,43 +123,44 @@
 </script>
 
 
+{% for conductor in conductor %}
 
     <div id="formulario">
             <form method="POST" action="" onsubmit="Guardar(CC.value)">
 
                 <br>
                 <span> Cedula</span>
-                <input type="text" name="CC">
+                <input type="text" name="CC" value="{{conductor[2]}}">
                     
                 <br>
                 <br>
                 <span> Nombre</span>
-                <input type="text" name="Nombre">
+                <input type="text" name="Nombre" value="{{conductor[1]}}">
                 <br>
                 <br>
                 
                 <span> Direccion</span>
-                <input type="text" name="Direccion">
+                <input type="text" name="Direccion" value="{{conductor[3]}}">
 
                 <br>
                 <br>
                 
                 <span> Email</span>
-                <input type="text" name="Email">
+                <input type="text" name="Email" value="{{conductor[4]}}">
                 
                 <br>
                 <br>
                 
                 <span> Fecha de nacimiento</span>
                 <input type="date" id="birthday" name="fecha_cumple"
-                value="2021-01-01"
+                value="{{conductor[7]}}"
                 min="1920-01-01" max="2025-12-31">
                 
                 <br>
                 <br>
                 
                 <span> Propietario</span>
-                <select id="Propietario" name="Propietario">
+                <select id="Propietario" name="Propietario" value="{{conductor[5]}}">
                     <option value="1">Si</option>
                     <option value="0">No</option>
                 </select>
@@ -171,7 +169,7 @@
                 <br>
                 
                 <span> Tipo de vehiculo</span>
-                <select id="tipo" name="tipo">
+                <select id="tipo" name="tipo" value="{{conductor[6]}}">
                     <option value="Particular">Particular</option>
                     <option value="Publico">Publico</option>
                 </select>
@@ -181,6 +179,7 @@
                 <input type="submit" name="button" >
         </form>
 
+        {% endfor %}
         
     </div>
     

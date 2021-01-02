@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta</title>
+
+    <style>
+        
+        table { 
+            border-collapse: collapse; 
+        }
+
+        th { 
+            background-color:green; 
+            Color:white; 
+        } 
+        th, td { 
+            width:150px; 
+            text-align:center; 
+            border:1px solid black; 
+            padding:5px 
+          
+        } 
+        .condutores { 
+            border-right:hidden; 
+        } 
+        .gfg { 
+            border-collapse:separate; 
+            border-spacing:0 15px; 
+        } 
+        h1 { 
+            color:green; 
+        } 
+        
+  
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1> Consulta conductores</h1>
+        
+        <ul>
+            
+            <li> <a href="http://localhost:5000/">Insertar</a></li>
+            <li> <a href="http://localhost:5000/consultar">Consultar</a></li>
+        </ul>
+        
+    </div>
+
+    <table class="gfg" border= 0>
+        <tr>
+            <th> ID</th>
+            <th> Nombre</td>
+            <th> CC</th>
+            <th> Direccion</th>
+            <th> Email</th>
+            <th> Propietario</th>
+            <th> Tipo de vehiculo</th>
+            <th> Fecha nacimiento</th>
+            <th> Firma</th>
+            
+            
+        </tr>
+        
+        {% for conductor in conductores %}
+        <tr>
+            <td class="condutores"> {{conductor[0]}}</td>
+            <td> {{conductor[1]}}</td>
+            <td> {{conductor[2]}}</td>
+            <td> {{conductor[3]}}</td>
+            <td> {{conductor[4]}}</td>
+            <td> {{conductor[5]}}</td>
+            <td> {{conductor[6]}}</td>
+            <td> {{conductor[7]}}</td>
+            <td> <img src="{{conductor[8]}}" alt="{{conductor[8]}}" width="50" height="50"> </td>
+            <td> <a href="http://localhost:5000/update/{{conductor[0]}}">actualizar</a>  </td>
+            <td> <a href="http://localhost:5000/delete/{{conductor[0]}}">Eliminar</a>  </td>
+            
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
